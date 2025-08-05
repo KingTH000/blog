@@ -1,4 +1,8 @@
 <?php
+
+phpinfo();
+
+
 $host = 'localhost';
 $user = 'root';
 $pass = '';
