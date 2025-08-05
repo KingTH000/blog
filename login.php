@@ -32,3 +32,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     Password: <input type="password" name="password" required><br>
     <button type="submit">Login</button>
 </form>
+
+<button onclick="location.href='register.php'">No account? Register</button>
