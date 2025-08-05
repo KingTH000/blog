@@ -7,8 +7,6 @@ error_reporting(E_ALL);
 
 <?php
 
-phpinfo();
-
 
 $host = 'localhost';
 $user = 'blogadmin';
