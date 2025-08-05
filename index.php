@@ -31,7 +31,7 @@ $posts = $post_stmt->get_result();
 </head>
 <body>
     <h1>Welcome, <?= htmlspecialchars($user['name']) ?>!</h1>
-    <a href="add_post.php">Add New Post</a> |
+    <a href="addpost.php">Add New Post</a> |
     <a href="logout.php">Logout</a>
     <hr>
 
@@ -50,7 +50,7 @@ $posts = $post_stmt->get_result();
             <?php endwhile; ?>
         </ul>
     <?php else: ?>
-        <p>No posts yet. <a href="add_post.php">Create one now!</a></p>
+        <p>No posts yet. <a href="addpost.php">Create one now!</a></p>
     <?php endif; ?>
 </body>
 </html>
