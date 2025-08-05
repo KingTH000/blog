@@ -11,8 +11,8 @@ phpinfo();
 
 
 $host = 'localhost';
-$user = 'root';
-$pass = '';
+$user = 'blogadmin';
+$pass = '1234';
 $dbname = 'blog';
 
 $conn = new mysqli($host, $user, $pass, $dbname);
