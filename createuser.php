@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head><title>Add User</title></head>
+<link rel="stylesheet" href="style.css">
 <body>
 <h2>Add New User</h2>
 <form method="POST" action="">

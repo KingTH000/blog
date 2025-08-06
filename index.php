@@ -34,13 +34,18 @@ $otherPosts = $stmt->get_result();
 <html>
 <head>
     <title>User Dashboard</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Welcome, <?= htmlspecialchars($user['username']) ?>!</h1>
-    <a href="addpost.php">Add New Post</a> |
-    <a href="logout.php">Logout</a>
-    <a href="updateuser.php?id=<?= $user_id ?>">Edit Profile</a>
-    <hr>
+    <div class="navbar">
+
+        <h1>Welcome, <?= htmlspecialchars($user['username']) ?>!</h1>
+        <a href="updateuser.php?id=<?= $user_id ?>">Edit Profile</a>
+        <a href="addpost.php">Add New Post</a> |
+        <a href="logout.php">Logout</a>
+        <hr>
+        
+    </div>
 
     <h2>Your Posts</h2>
     <?php if ($posts->num_rows > 0): ?>

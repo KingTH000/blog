@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html>
 <head><title>Edit User</title></head>
+<link rel="stylesheet" href="style.css">
 <body>
 <h2>Edit User</h2>
 <?php

@@ -28,6 +28,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 }
 ?>
 
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
 <form method="post">
     Email: <input type="email" name="email" required><br>
     Password: <input type="password" name="password" required><br>
