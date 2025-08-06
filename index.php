@@ -59,13 +59,14 @@ $otherPosts = $stmt->get_result();
         <p>No posts yet. <a href="addpost.php">Create one now!</a></p>
     <?php endif; ?>
 
-    <h2>All Posts from Other Users</h2>
+    <h2>All Posts</h2>
     <?php if ($otherPosts): ?>
         <ul>
             <?php foreach ($otherPosts as $post): ?>
                 <li>
                     <strong><?= htmlspecialchars($post['title']) ?></strong><br>
                     <?= nl2br(htmlspecialchars($post['content'])) ?><br>
+                    <small>Posted by: <?= htmlspecialchars($post['username']) ?></small><br>
                     <small>Posted on: <?= $post['created_at'] ?></small><br>
                     <hr>
                 </li>
