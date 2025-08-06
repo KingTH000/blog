@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <input type="text" name="title" value="<?= htmlspecialchars($post['title']) ?>"><br><br>
 
         <label>Content:</label><br>
-        <textarea name="content" rows="10" cols="50"><?= htmlspecialchars($post['context']) ?></textarea><br><br>
+        <textarea name="content" rows="10" cols="50"><?= htmlspecialchars($post['content']) ?></textarea><br><br>
 
         <button type="submit">Update Post</button>
     </form>
