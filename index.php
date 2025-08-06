@@ -39,6 +39,7 @@ $otherPosts = $stmt->get_result();
     <h1>Welcome, <?= htmlspecialchars($user['username']) ?>!</h1>
     <a href="addpost.php">Add New Post</a> |
     <a href="logout.php">Logout</a>
+    <a href="updateuser.php?id=<?= $user_id ?>">Edit Profile</a>
     <hr>
 
     <h2>Your Posts</h2>
