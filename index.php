@@ -64,7 +64,10 @@ $otherPosts = $stmt->get_result();
         <ul>
             <?php foreach ($otherPosts as $post): ?>
                 <li>
-                    <strong><?php echo htmlspecialchars($post['title']); ?></strong> by <?php echo htmlspecialchars($post['username']); ?>
+                    <strong><?= htmlspecialchars($post['title']) ?></strong><br>
+                    <?= nl2br(htmlspecialchars($post['content'])) ?><br>
+                    <small>Posted on: <?= $post['created_at'] ?></small><br>
+                    <hr>
                 </li>
             <?php endforeach; ?>
         </ul>
