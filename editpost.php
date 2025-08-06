@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h2>Edit Post</h2>
     <form method="POST">
         <label>Title:</label><br>
-        <input type="text" name="title" value="<?= htmlspecialchars($post['title']) ?>"><br><br>
+        <input type="text" name="title" value="$post['title']"><br><br>
 
         <label>Content:</label><br>
         <textarea name="content" rows="10" cols="50"><?= htmlspecialchars($post['content']) ?></textarea><br><br>
