@@ -19,7 +19,7 @@ if (!isset($_GET['id'])) {
 $post_id = $_GET['id'];
 
 // Fetch the post
-$stmt = $pdo->prepare("SELECT * FROM posts WHERE id = ? AND user_id = ?");
+$stmt = $stmt->prepare("SELECT * FROM posts WHERE id = ? AND user_id = ?");
 $stmt->execute([$post_id, $user_id]);
 $post = $stmt->fetch();
 
