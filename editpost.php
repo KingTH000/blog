@@ -34,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $content = $_POST['content'] ?? '';
 
     if ($title && $content) {
-        $update = $pdo->prepare("UPDATE posts SET title = ?, content = ? WHERE id = ? AND user_id = ?");
+        $update = $conn->prepare("UPDATE posts SET title = ?, content = ? WHERE id = ? AND user_id = ?");
         $update->execute([$title, $content, $post_id, $user_id]);
         header('Location: index.php');
         exit;
@@ -53,10 +53,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h2>Edit Post</h2>
     <form method="POST">
         <label>Title:</label><br>
-        <input type="text" name="title" value="<?php echo htmlspecialchars($post['title']) ?>"><br><br>
+        <input type="text" name="title" value="<?php echo htmlspecialchars($title) ?>"><br><br>
 
         <label>Content:</label><br>
-        <textarea name="content" rows="10" cols="50"><?php echo htmlspecialchars($post['content']) ?></textarea><br><br>
+        <textarea name="content" rows="10" cols="50"><?php echo htmlspecialchars($content) ?></textarea><br><br>
 
         <button type="submit">Update Post</button>
     </form>
