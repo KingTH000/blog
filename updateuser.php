@@ -18,7 +18,7 @@ $user = $result->fetch_assoc();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $conn->real_escape_string($_POST['name']);
     $email = $conn->real_escape_string($_POST['email']);
-    $conn->query("UPDATE users SET name='$name', email='$email' WHERE id=$id");
+    $conn->query("UPDATE users SET username='$name', email='$email' WHERE id=$id");
     header("Location: index.php");
     exit();
 }

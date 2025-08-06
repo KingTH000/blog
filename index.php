@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 $user_id = $_SESSION['user_id'];
 
 // Fetch user info
-$user_stmt = $conn->prepare("SELECT name FROM users WHERE id = ?");
+$user_stmt = $conn->prepare("SELECT username FROM users WHERE id = ?");
 $user_stmt->bind_param("i", $user_id);
 $user_stmt->execute();
 $user_result = $user_stmt->get_result();
@@ -30,7 +30,7 @@ $posts = $post_stmt->get_result();
     <title>User Dashboard</title>
 </head>
 <body>
-    <h1>Welcome, <?= htmlspecialchars($user['name']) ?>!</h1>
+    <h1>Welcome, <?= htmlspecialchars($user['username']) ?>!</h1>
     <a href="addpost.php">Add New Post</a> |
     <a href="logout.php">Logout</a>
     <hr>

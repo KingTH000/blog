@@ -13,7 +13,7 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $conn->real_escape_string($_POST['name']);
     $email = $conn->real_escape_string($_POST['email']);
-    $conn->query("INSERT INTO users (name, email) VALUES ('$name', '$email')");
+    $conn->query("INSERT INTO users (username, email) VALUES ('$name', '$email')");
     header("Location: index.php");
     exit();
 }
