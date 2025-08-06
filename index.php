@@ -39,14 +39,16 @@ $otherPosts = $stmt->get_result();
 <body>
     <div class="navbar">
 
-        <h1>Welcome, <?= htmlspecialchars($user['username']) ?>!</h1>
-        <a href="updateuser.php?id=<?= $user_id ?>">Edit Profile</a>
-        <a href="addpost.php">Add New Post</a> |
-        <a href="logout.php">Logout</a>
+        <h1 id="welcomeText">Welcome, <?= htmlspecialchars($user['username']) ?>!</h1>
+        <a href="updateuser.php?id=<?= $user_id ?>"><button class="navbarButton">Edit Profile</button></a>
+        <a href="addpost.php"><button class="navbarButton">New Post</button></a> |
+        <a href="logout.php"><button class="navbarButton">Logout</button></a>
         <hr>
         
     </div>
 
+    <div class="container">
+        
     <h2>Your Posts</h2>
     <?php if ($posts->num_rows > 0): ?>
         <ul>
@@ -81,5 +83,7 @@ $otherPosts = $stmt->get_result();
     <?php else: ?>
         <p>No other posts available.</p>
     <?php endif; ?>
+
+    </div>
 </body>
 </html>
