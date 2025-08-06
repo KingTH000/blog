@@ -21,7 +21,8 @@ $post_id = $_GET['id'];
 // Fetch the post
 $stmt = $conn->prepare("SELECT * FROM posts WHERE id = ? AND user_id = ?");
 $stmt->execute([$post_id, $user_id]);
-$post = $stmt->fetch();
+$post = $stmt->get_result()->fetch_assoc();
+
 
 if (!$post) {
     echo "Post not found or you don't have permission.";
