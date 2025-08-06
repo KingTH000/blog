@@ -41,7 +41,7 @@ $otherPosts = $stmt->get_result();
 
         <h1 id="welcomeText">Welcome, <?= htmlspecialchars($user['username']) ?>!</h1>
         <button>
-            <a href="updateuser.php?id=<?= $user_id ?>"><button class="navbarButton">Edit Profile</a>
+            <a href="updateuser.php?id=<?= $user_id ?>">Edit Profile</a>
         </button>
         <button>
             <a href="addpost.php">New Post</a> |
