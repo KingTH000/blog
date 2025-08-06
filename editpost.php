@@ -53,10 +53,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h2>Edit Post</h2>
     <form method="POST">
         <label>Title:</label><br>
-        <input type="text" name="title" value="$post['title']"><br><br>
+        <input type="text" name="title" value="<?php echo htmlspecialchars($post['title']) ?>"><br><br>
 
         <label>Content:</label><br>
-        <textarea name="content" rows="10" cols="50"><?= htmlspecialchars($post['content']) ?></textarea><br><br>
+        <textarea name="content" rows="10" cols="50"><?php echo htmlspecialchars($post['content']) ?></textarea><br><br>
 
         <button type="submit">Update Post</button>
     </form>
