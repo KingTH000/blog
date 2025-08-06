@@ -10,7 +10,7 @@ $result = $conn->query("SELECT * FROM users WHERE id = $id");
 $user = $result->fetch_assoc();
 ?>
 <form method="POST" action="">
-    Name: <input type="text" name="name" value="<?= $user['name'] ?>" required><br><br>
+    Name: <input type="text" name="name" value="<?= $user['username'] ?>" required><br><br>
     Email: <input type="email" name="email" value="<?= $user['email'] ?>" required><br><br>
     <input type="submit" value="Update User">
 </form>
