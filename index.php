@@ -40,9 +40,16 @@ $otherPosts = $stmt->get_result();
     <div class="navbar">
 
         <h1 id="welcomeText">Welcome, <?= htmlspecialchars($user['username']) ?>!</h1>
-        <a href="updateuser.php?id=<?= $user_id ?>"><button class="navbarButton">Edit Profile</button></a>
-        <a href="addpost.php"><button class="navbarButton">New Post</button></a> |
-        <a href="logout.php"><button class="navbarButton">Logout</button></a>
+        <button>
+            <a href="updateuser.php?id=<?= $user_id ?>"><button class="navbarButton">Edit Profile</a>
+        </button>
+        <button>
+            <a href="addpost.php">New Post</a> |
+        </button>
+        <button>
+            <a href="logout.php">Logout</a>
+        </button>
+        
         <hr>
         
     </div>
