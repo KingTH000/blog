@@ -22,6 +22,12 @@ $post_stmt = $conn->prepare("SELECT * FROM posts WHERE user_id = ? ORDER BY crea
 $post_stmt->bind_param("i", $user_id);
 $post_stmt->execute();
 $posts = $post_stmt->get_result();
+
+
+// Fetch posts from other users
+$stmt = $conn->prepare("SELECT posts.*, users.username FROM posts JOIN users ON posts.user_id = users.id WHERE posts.user_id != ? ORDER BY created_at DESC");
+$stmt->execute([$user_id ?? 0]); // If not logged in, show all posts
+$otherPosts = $stmt->get_result();
 ?>
 
 <!DOCTYPE html>
@@ -51,6 +57,19 @@ $posts = $post_stmt->get_result();
         </ul>
     <?php else: ?>
         <p>No posts yet. <a href="addpost.php">Create one now!</a></p>
+    <?php endif; ?>
+
+    <h2>All Posts from Other Users</h2>
+    <?php if ($otherPosts): ?>
+        <ul>
+            <?php foreach ($otherPosts as $post): ?>
+                <li>
+                    <strong><?php echo htmlspecialchars($post['title']); ?></strong> by <?php echo htmlspecialchars($post['username']); ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php else: ?>
+        <p>No other posts available.</p>
     <?php endif; ?>
 </body>
 </html>
