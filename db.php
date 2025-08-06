@@ -9,7 +9,7 @@ error_reporting(E_ALL);
 
 
 $host = 'localhost';
-$user = 'blogadmin';
+$user = 'root';
 $pass = '1234';
 $dbname = 'blog';
 

@@ -41,7 +41,7 @@ $posts = $post_stmt->get_result();
             <?php while ($post = $posts->fetch_assoc()): ?>
                 <li>
                     <strong><?= htmlspecialchars($post['title']) ?></strong><br>
-                    <?= nl2br(htmlspecialchars($post['context'])) ?><br>
+                    <?= nl2br(htmlspecialchars($post['content'])) ?><br>
                     <small>Posted on: <?= $post['created_at'] ?></small><br>
                     <a href="editpost.php?id=<?= $post['id'] ?>">✏️ Edit</a> |
                     <a href="deletepost.php?id=<?= $post['id'] ?>" onclick="return confirm('Are you sure?')">🗑️ Delete</a>

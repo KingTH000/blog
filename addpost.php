@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = $_SESSION['user_id'];
 
     if ($title && $content) {
-        $stmt = $conn->prepare("INSERT INTO posts (user_id, title, context) VALUES (?, ?, ?)");
+        $stmt = $conn->prepare("INSERT INTO posts (user_id, title, content) VALUES (?, ?, ?)");
         $stmt->bind_param("iss", $user_id, $title, $content);
         if ($stmt->execute()) {
             $message = "Post created successfully!";
@@ -48,6 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <textarea name="content" rows="6" cols="40" required></textarea><br><br>
         <button type="submit">Create Post</button>
     </form>
-    <p><a href="index.php">← Back to Dashboard</a></p>
+    <p><a href="index.php">Back to Dashboard</a></p>
 </body>
 </html>
