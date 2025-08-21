@@ -16,13 +16,14 @@ if (!isset($_GET['id'])) {
     exit;
 }
 
-$post_id = $_GET['id'];
+$post_id = (int)$_GET['id'];
 
 // Fetch the post
 $stmt = $conn->prepare("SELECT * FROM posts WHERE id = ? AND user_id = ?");
-$stmt->execute([$post_id, $user_id]);
-$post = $stmt->get_result()->fetch_assoc();
-
+$stmt->bind_param("ii", $post_id, $user_id);
+$stmt->execute();
+$result = $stmt->get_result();
+$post = $result->fetch_assoc();
 
 if (!$post) {
     echo "Post not found or you don't have permission.";
@@ -36,7 +37,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($title && $content) {
         $update = $conn->prepare("UPDATE posts SET title = ?, content = ? WHERE id = ? AND user_id = ?");
-        $update->execute([$title, $content, $post_id, $user_id]);
+        $update->bind_param("ssii", $title, $content, $post_id, $user_id);
+        $update->execute();
         header('Location: index.php');
         exit;
     } else {
@@ -44,7 +46,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -55,10 +56,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h2>Edit Post</h2>
     <form method="POST">
         <label>Title:</label><br>
-        <input type="text" name="title" value="<?php echo htmlspecialchars($post['title']) ?>"><br><br>
+        <input type="text" name="title" value="<?php echo htmlspecialchars($post['title']); ?>"><br><br>
 
         <label>Content:</label><br>
-        <textarea name="content" rows="10" cols="50"><?php echo htmlspecialchars($post['content']) ?></textarea><br><br>
+        <textarea name="content" rows="10" cols="50"><?php echo htmlspecialchars($post['content']); ?></textarea><br><br>
 
         <button type="submit">Update Post</button>
     </form>
