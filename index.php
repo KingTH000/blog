@@ -26,8 +26,10 @@ $posts = $post_stmt->get_result();
 
 // Fetch posts from other users
 $stmt = $conn->prepare("SELECT posts.*, users.username FROM posts JOIN users ON posts.user_id = users.id WHERE posts.user_id != ? ORDER BY created_at DESC");
-$stmt->execute([$user_id ?? 0]); // If not logged in, show all posts
+$stmt->bind_param("i", $user_id);
+$stmt->execute();
 $otherPosts = $stmt->get_result();
+
 ?>
 
 <!DOCTYPE html>
