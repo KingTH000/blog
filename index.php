@@ -9,6 +9,15 @@ if (!isset($_SESSION['user_id'])) {
     exit;
 }
 
+$sub = $_SESSION['username'];
+$obj = "post";
+$act = "read";
+
+// Check with Casbin
+if (!casbinEnforce($sub, $obj, $act)) {
+    die("Unauthorized: insufficient permissions");
+}
+
 $user_id = $_SESSION['user_id'];
 
 // Fetch user info

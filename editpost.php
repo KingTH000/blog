@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'db.php';
+require 'casbin.php';
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
@@ -9,6 +10,15 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $user_id = $_SESSION['user_id'];
+
+$sub = $_SESSION['username'];
+$obj = "post_own";
+$act = "edit";
+
+// Check with Casbin
+if (!casbinEnforce($sub, $obj, $act)) {
+    die("Unauthorized: insufficient permissions");
+}
 
 // Check if post ID is provided
 if (!isset($_GET['id'])) {

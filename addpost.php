@@ -1,12 +1,23 @@
 <?php
 session_start();
 require 'db.php';
+require 'casbin.php';
 
 // Check if user is logged in
-if (!isset($_SESSION['user_id'])) {
+if (!isset($_SESSION['username'])) {
     header('Location: login.php');
     exit;
 }
+
+$sub = $_SESSION['username'];
+$obj = "post";
+$act = "create";
+
+// Check with Casbin
+if (!casbinEnforce($sub, $obj, $act)) {
+    die("Unauthorized: insufficient permissions");
+}
+
 
 $message = '';
 

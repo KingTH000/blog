@@ -1,13 +1,23 @@
 <?php
 session_start();
-require 'db.php';  // your DB connection
-require 'casbin.php'; // <-- new: Casbin client setup
+require 'db.php';  // DB connection
+require 'casbin.php'; // Casbin client setup
 
 if (!isset($_SESSION['user_id'])) {
     die("Unauthorized");
 }
 
 $username = $_SESSION['username'];
+
+$sub = $_SESSION['username'];
+$obj = "post";
+$act = "delete";
+
+// Check with Casbin
+if (!casbinEnforce($sub, $obj, $act)) {
+    die("Unauthorized: insufficient permissions");
+}
+
 
 // Get post ID
 if (!isset($_GET['id'])) {
