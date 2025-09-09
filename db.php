@@ -10,7 +10,7 @@ error_reporting(E_ALL);
 
 $host = 'localhost';
 $user = 'root';
-$pass = '1234';
+$pass = '';
 $dbname = 'blog';
 
 $conn = new mysqli($host, $user, $pass, $dbname);

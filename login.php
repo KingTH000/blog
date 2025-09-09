@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->fetch();
         if (password_verify($password, $hashed_password)) {
             $_SESSION['user_id'] = $id;
-            $_SESSION['name'] = $name;
+            $_SESSION['username'] = $name;
             header('Location: index.php');
             //echo "Login successful! <a href='index.php'>Go to home</a>";
         } else {
