@@ -53,12 +53,9 @@ $otherPosts = $stmt->get_result();
     <div class="navbar">
         <h1 id="welcomeText">
             Welcome, 
-            <?= htmlspecialchars($user['username']) ?>
-            <?php   if (casbinEnforce($username, "admin", NULL)) {
-                        echo "(admin)";
-                        
-                    } 
-                    echo (casbinEnforce($username, "admin", NULL));
+            <?= htmlspecialchars($user['username'])?>
+            <?php   
+                    echo (casbinEnforce($username, "admin",  "access")) ? "(admin)" : "";
             ?>!
         </h1>
         <div class="navbar-buttons">

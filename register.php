@@ -25,13 +25,31 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if ($stmt->num_rows > 0) {
             $errors[] = "Email is already registered.";
         } else {
-            // Hash and insert
+            // Hash and insert into users
             $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
             $stmt = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
             $stmt->bind_param("sss", $name, $email, $hashedPassword);
 
             if ($stmt->execute()) {
-                $success = "Registration successful. You can now <a href='login.php'>login</a>.";
+                // ✅ Assign "user" role via Casbin API
+                $casbinUrl = "http://localhost:8080/role";
+                $payload = json_encode(["user" => $name, "role" => "user"]);
+
+                $ch = curl_init($casbinUrl);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_HTTPHEADER, ["Content-Type: application/json"]);
+                curl_setopt($ch, CURLOPT_POST, true);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+                $apiResponse = curl_exec($ch);
+                curl_close($ch);
+
+                // Optional: check API response
+                $res = json_decode($apiResponse, true);
+                if (isset($res['message'])) {
+                    $success = "Registration successful (role assigned). You can now <a href='login.php'>login</a>.";
+                } else {
+                    $errors[] = "User registered, but failed to assign role in Casbin.";
+                }
             } else {
                 $errors[] = "Registration failed. Please try again.";
             }
@@ -39,42 +57,3 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Register</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <h2>User Registration</h2>
-
-    <?php if (!empty($errors)): ?>
-        <ul style="color: red;">
-            <?php foreach ($errors as $e): ?>
-                <li><?= htmlspecialchars($e) ?></li>
-            <?php endforeach; ?>
-        </ul>
-    <?php endif; ?>
-
-    <?php if ($success): ?>
-        <p style="color: green;"><?= $success ?></p>
-    <?php endif; ?>
-
-    <form method="POST">
-        <label>Name:</label><br>
-        <input type="text" name="name" required><br><br>
-
-        <label>Email:</label><br>
-        <input type="email" name="email" required><br><br>
-
-        <label>Password:</label><br>
-        <input type="password" name="password" required><br><br>
-
-        <label>Confirm Password:</label><br>
-        <input type="password" name="confirm_password" required><br><br>
-
-        <button type="submit">Register</button>
-    </form>
-</body>
-</html>
