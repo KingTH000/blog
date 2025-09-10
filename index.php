@@ -59,6 +59,11 @@ $otherPosts = $stmt->get_result();
             ?>!
         </h1>
         <div class="navbar-buttons">
+            <?php
+                if (casbinEnforce($username, "admin", "access")) {
+                    echo "<button><a href='admin.php'>Admin Panel</a> </button>";
+                }
+            ?>
             <button>
                 <a href="updateuser.php?id=<?= $user_id ?>">Edit Profile</a>
             </button>
